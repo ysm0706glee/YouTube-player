@@ -2,25 +2,29 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { SearchDataProvider } from "./context/SearchData";
+import { ContextProvider } from "./context";
 import App from "./App";
+import SearchVideo from "./routes/SearchVideosList";
 import Video from "./routes/Video";
-import List from "./routes/List";
+import Playlist from "./routes/Playlist";
+import SharedPlaylist from "./routes/SharedPlaylist";
 
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <SearchDataProvider>
+  <ContextProvider>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route index element={<List />} />
-          <Route path="video/:id" element={<Video />} />
+          <Route index element={<SearchVideo />} />
+          <Route path="video/:videoId" element={<Video />} />
+          <Route path="playlist" element={<Playlist />} />
         </Route>
+        <Route path="SharedPlaylist/:playlistId" element={<SharedPlaylist />} />
       </Routes>
     </BrowserRouter>
-  </SearchDataProvider>
+  </ContextProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
